@@ -1,20 +1,20 @@
-﻿using RockPaperScissorsGame.Enums;
+﻿using System.Security.Cryptography;
+using RockPaperScissorsGame.Enums;
 using RockPaperScissorsGame.Models;
-using System.Security.Cryptography;
 
-class Program
+public class Program
 {
-    static bool CheckArgs(string[] args)
+    public static bool CheckArgs(string[] args)
     {
         if (args.Length < 3 || args.Length % 2 == 0)
         {
-            Console.WriteLine("Invalid options: please pass odd number of moves (3 or more).");
+            Console.WriteLine("Invalid options: please provide an odd number of moves (3 or more).");
             return false;
         }
 
         if (args.Length != args.Distinct().Count())
         {
-            Console.WriteLine("Invalid options: all moves must be distinct.");
+            Console.WriteLine("Invalid options: all moves must be unique.");
             return false;
         }
 
@@ -28,17 +28,18 @@ class Program
             return;
         }
 
-        var sec = new Security();
-        var a = new Table(args);
-        var judge = new Judge(args.Length);
+        var sec = new KeyGenerator();
+        var a = new MoveTable(args);
+        var ResultDecide = new ResultDecide(args.Length);
 
         bool gameFinished = false;
 
         while (!gameFinished)
         {
+            Console.Clear();
             var key = sec.GenerateKey();
-            var computerMove = RandomNumberGenerator.GetInt32(args.Length);
-            var hmac = sec.GenerateHMAC(key, args[computerMove]);
+            var randomNumber = RandomNumberGenerator.GetInt32(args.Length);
+            var hmac = sec.GenerateHMAC(key, args[randomNumber]);
 
             Console.WriteLine("HMAC: " + hmac);
 
@@ -75,15 +76,15 @@ class Program
             }
 
             Console.WriteLine("Your move: " + args[playerMove - 1]);
-            Console.WriteLine("Computer move: " + args[computerMove]);
+            Console.WriteLine("Computer move: " + args[randomNumber]);
 
-            switch (judge.Decide(computerMove, playerMove - 1))
+            switch (ResultDecide.Decide(randomNumber, playerMove - 1))
             {
-                case Outcome.WIN:
+                case Result.WIN:
                     Console.WriteLine("You won!");
                     break;
 
-                case Outcome.LOSE:
+                case Result.LOSE:
                     Console.WriteLine("You lost!");
                     break;
 
@@ -93,7 +94,10 @@ class Program
             }
 
             Console.WriteLine("HMAC key: " + key);
-            Console.Write("\n\n\n");
+            Console.Write("\n\n");
+
+            Console.WriteLine("Press the key to continue");
+            Console.ReadKey();
         }
     }
 }
