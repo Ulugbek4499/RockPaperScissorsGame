@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-
-namespace RockPaperScissorsGame.Models;
+﻿namespace RockPaperScissorsGame.Models;
 
 public class KeyGenerator
 {

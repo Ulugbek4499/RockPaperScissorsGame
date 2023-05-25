@@ -1,7 +1,4 @@
-﻿using System.Security.Cryptography;
-using System.Text;
-
-namespace RockPaperScissorsGame.Models;
+﻿namespace RockPaperScissorsGame.Models;
 
 public class HmacGenerator
 {

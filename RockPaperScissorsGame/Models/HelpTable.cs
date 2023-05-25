@@ -1,7 +1,4 @@
-﻿using ConsoleTables;
-using RockPaperScissorsGame.Enums;
-
-namespace RockPaperScissorsGame.Models;
+﻿namespace RockPaperScissorsGame.Models;
 
 class HelpTable
 {

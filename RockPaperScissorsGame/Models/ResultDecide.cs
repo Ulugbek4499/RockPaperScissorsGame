@@ -1,6 +1,4 @@
-﻿using RockPaperScissorsGame.Enums;
-
-namespace RockPaperScissorsGame.Models;
+﻿namespace RockPaperScissorsGame.Models;
 
 public class GameDecider
 {
