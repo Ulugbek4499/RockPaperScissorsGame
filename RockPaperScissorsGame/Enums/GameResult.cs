@@ -1,5 +1,5 @@
 ﻿namespace RockPaperScissorsGame.Enums;
-public enum Result
+public enum GameResult
 {
     WIN,
     LOSE,

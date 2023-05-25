@@ -2,23 +2,22 @@
 
 namespace RockPaperScissorsGame.Models;
 
-public class ResultDecide
+public class GameDecider
 {
-   public int MovesCount;
+    public int MoveCount;
 
-    public ResultDecide(int movesCount)=>
-        MovesCount = movesCount;
-    
-    public Result Decide(int firstMove, int secondMove)
+    public GameDecider(int MoveCount) =>
+        this.MoveCount = MoveCount;
+
+    public GameResult Decide(int firstMove, int secondMove)
     {
         if (firstMove == secondMove)
-            return Result.DRAW;
-        
+            return GameResult.DRAW;
 
-        if ((secondMove > firstMove && secondMove - firstMove <= MovesCount / 2) || 
-            (secondMove < firstMove && firstMove - secondMove > MovesCount / 2))
-           return Result.WIN;
-        
-        return Result.LOSE;
+        if ((secondMove > firstMove && secondMove - firstMove <= this.MoveCount / 2) ||
+            (secondMove < firstMove && firstMove - secondMove > this.MoveCount / 2))
+            return GameResult.WIN;
+
+        return GameResult.LOSE;
     }
 }
